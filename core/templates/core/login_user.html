@@ -1,21 +1,31 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block title %}Login User{% endblock %}
 
 {% block content %}
-<div class="container">
+{% include 'core/neon_theme.html' %}
+
+<div class="neon-wrapper">
+  <div class="neon-card">
+    <h2 class="neon-title">Welcome back</h2>
+
     <form action="" method="post">
-        {% csrf_token %}
-          <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">Username</label>
-                <input type="text" name="username" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-          </div>
-          <div class="mb-3">
-                <label for="exampleInputPassword1" class="form-label">Password</label>
-                <input type="password" name="password" class="form-control" id="exampleInputPassword1">
-          </div>
-          <button type="submit" class="btn btn-primary">Submit</button>
+	  {% csrf_token %}
+	    <div class="mb-3">
+		    <label for="exampleInputEmail1" class="form-label">Username</label>
+		    <input type="text" name="username" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="your username...">
+	    </div>
+	    <div class="mb-3">
+		    <label for="exampleInputPassword1" class="form-label">Password</label>
+		    <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="••••••••">
+	    </div>
+	    <button type="submit" class="neon-btn">Sign in</button>
+	    <div class="meta-row">
+		    <div class="hint">Don't have an account? <a href="{% url 'core:reg_user' %}" style="color:#8ad7ff;">Register</a></div>
+		    <div class="hint">Forgot? <a href="#" style="color:#c78bff;">Reset</a></div>
+	    </div>
     </form>
+  </div>
 </div>
 
 {% endblock %}

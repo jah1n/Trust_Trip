@@ -1,8 +1,9 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block title %}Book{% endblock %}
 
 {% block content %}
+{% include 'core/neon_theme.html' %}
 <div class="container text-center">
 <form method="post" action="">
     {% csrf_token %}

@@ -1,0 +1,55 @@
+<!-- Shared dark + neon theme include -->
+<style>
+  /* Page background */
+  body.dark-neon {
+    background: radial-gradient(1200px 600px at 10% 10%, rgba(34,20,61,0.22), transparent 10%),
+                radial-gradient(1000px 400px at 90% 80%, rgba(0,120,255,0.06), transparent 10%),
+                #0b0f17;
+    color: #0f3371;
+  }
+
+  .neon-wrapper { min-height: 60vh; padding: 1rem; }
+
+  .neon-card { max-width: 720px; margin: 0 auto; background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); border-radius: 12px; padding: 1.25rem; box-shadow: 0 6px 30px rgba(0,0,0,0.6); border:1px solid rgba(255,255,255,0.04); backdrop-filter: blur(6px); }
+
+  label.form-label { color: #0c4074; }
+
+  .form-control { background: rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.04); color:#0d2f73; }
+  .form-control:focus { border-color: rgba(9, 69, 134, 0.85); box-shadow: 0 0 18px rgba(0,200,255,0.08); }
+
+  .neon-btn { padding: 0.5rem 1rem; border-radius: 8px; background: linear-gradient(90deg,#7b5cff,#0b4170); color:#071225; border:none; box-shadow: 0 6px 20px rgba(123,92,255,0.18); }
+
+  .map-container { border-radius: 12px; overflow:hidden; }
+  .map-frame { width:100%; height:60vh; border:0; }
+
+  .booking-card { background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01)); border-radius:12px; padding:1rem; box-shadow: 0 6px 30px rgba(0,0,0,0.4); }
+
+  .theme-toggle { position: fixed; top: 4rem; right: 1rem; background: rgba(11,15,23,0.85); border:1px solid rgba(255,255,255,0.1); color:#282a81; padding:0.5rem 0.8rem; border-radius:8px; z-index:2000; }
+
+</style>
+
+<!-- Theme toggle button (inserted where included) -->
+<button class="theme-toggle" id="themeToggle">TrustTrip <span id="themeState"></span></button>
+
+<script>
+(function(){
+  const body = document.body;
+  // initialize classes
+  if (!body.classList.contains('dark-neon')) body.classList.add('dark-neon');
+  if (!body.classList.contains('neon-on')) body.classList.add('neon-on');
+  const toggle = document.getElementById('themeToggle');
+  const state = document.getElementById('themeState');
+  if (toggle) {
+    toggle.addEventListener('click', function(e){
+      e.preventDefault();
+      if (body.classList.contains('neon-on')) {
+        body.classList.remove('neon-on');
+        state && (state.textContent = '');
+      } else {
+        body.classList.add('neon-on');
+        state && (state.textContent = '');
+      }
+    });
+  }
+})();
+</script>

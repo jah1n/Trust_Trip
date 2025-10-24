@@ -83,6 +83,7 @@ def driver_profile(request):
 
     return render(request, 'core/driver_profile.html', {'driver': driver})
 
+
 @login_required
 def update_user(request):
     if request.method == 'POST':

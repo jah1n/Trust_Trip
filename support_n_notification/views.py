@@ -2,7 +2,8 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from booking_n_service.models import BookingUserSide
 from .models import Review
-
+from django.contrib import messages
+from django.shortcuts import redirect
 
 @login_required
 def give_review(request, pk):
@@ -20,3 +21,6 @@ def view_review(request):
         reviews = Review.objects.filter(user=request.user.user_profile)
 
     return render(request, 'support_n_notification/view_review.html', {'reviews': reviews})
+def no_reviews(request):
+    messages.info(request, "No existing reviews")
+    return redirect('support_n_notification:view_review')

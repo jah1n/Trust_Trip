@@ -1,6 +1,7 @@
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, redirect
-
+from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib import messages
+from django.shortcuts import redirect
 from .models import BookingUserSide, Share, BookingDriverSide, Payment
 
 
@@ -93,13 +94,30 @@ def join_ride(request, pk):
 @login_required
 def view_payment(request):
     payments = Payment.objects.filter(user=request.user.user_profile)
-    return render(request, 'booking_n_service/view_payment.html', {'payments': payments})
+    # whether there are any unpaid (pending) payments
+    pending_exists = payments.filter(status=False).exists()
+    return render(request, 'booking_n_service/view_payment.html', {'payments': payments, 'pending_exists': pending_exists})
 
 
 def pay_payment(request, pk):
-    payment = Payment.objects.get(pk=pk)
+    # mark a payment paid, ensure it belongs to the current user, then redirect with a message
+    payment = get_object_or_404(Payment, pk=pk)
+    # simple ownership check - Payment.user is a UserProfile in your codebase
+    if payment.user != request.user.user_profile:
+        messages.error(request, "You are not authorized to pay this payment.")
+        return redirect('booking_n_service:view_payment')
+
     payment.status = True
     payment.save()
-    payments = Payment.objects.filter(user=request.user.user_profile)
-    return render(request, 'booking_n_service/view_payment.html', {'payments': payments})
+    messages.success(request, "Payment successful")
+    return redirect('booking_n_service:view_payment')
+
+def payment_success(request):
+    messages.success(request, "Payment successful")
+    return redirect('booking_n_service:view_payment')
+
+def no_pending_payments(request):
+    messages.info(request, "No pending payments")
+    return redirect('booking_n_service:view_payment')
+
 

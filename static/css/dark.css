@@ -1,0 +1,40 @@
+:root {
+  --bg: #0b0f12;
+  --panel: #12181c;
+  --text: #e6f0ef;
+  --muted: #9aa6ae;
+  --accent: #7cf0d2;
+  --danger: #ff6b6b;
+  font-family: 'Segoe UI', Roboto, sans-serif;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 20px;
+  background: var(--panel);
+  border-radius: 10px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.6);
+}
+
+h1, h2, h3 {
+  color: var(--accent);
+}
+
+.message {
+  padding: 12px 16px;
+  margin: 10px 0;
+  border-radius: 6px;
+  font-weight: 500;
+}
+
+.message.success { background: rgba(124,240,210,0.1); color: var(--accent); }
+.message.info    { background: rgba(154,166,174,0.1); color: var(--muted); }
+.message.error   { background: rgba(255,107,107,0.1); color: var(--danger); }

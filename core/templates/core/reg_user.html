@@ -1,26 +1,35 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block title %}User Registration{% endblock %}
 
 {% block content %}
-<div class="container">
-    <form action="" method="post">
-        {% csrf_token %}
-        <div class="mb-3">
-            <label for="InputUsername1" class="form-label">Username</label>
-            <input type="text" name="username" class="form-control" id="InputUsername1">
-        </div>
-        <div class="mb-3">
-            <label for="InputEmail1" class="form-label">Email</label>
-            <input type="email" name="email" class="form-control" id="InputEmail1">
-        </div>
-        <div class="mb-3">
-            <label for="InputPassword1" class="form-label">Password</label>
-            <input type="password" name="password" class="form-control" id="InputPassword1">
-        </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
+{% include 'core/neon_theme.html' %}
 
-    </form>
+<div class="neon-wrapper">
+  <div class="neon-card">
+	<h2 class="neon-title">Create an account</h2>
+
+	<form action="" method="post">
+		{% csrf_token %}
+		<div class="mb-3">
+			<label for="InputUsername1" class="form-label">Username</label>
+			<input type="text" name="username" class="form-control" id="InputUsername1" placeholder="choose a username">
+		</div>
+		<div class="mb-3">
+			<label for="InputEmail1" class="form-label">Email</label>
+			<input type="email" name="email" class="form-control" id="InputEmail1" placeholder="you@example.com">
+		</div>
+		<div class="mb-3">
+			<label for="InputPassword1" class="form-label">Password</label>
+			<input type="password" name="password" class="form-control" id="InputPassword1" placeholder="create a password">
+		</div>
+		<button type="submit" class="neon-btn">Register</button>
+
+		<div class="meta-row">
+			<div class="hint">Already registered? <a href="{% url 'core:login_user' 'user' %}" style="color:#8ad7ff;">Login</a></div>
+			<div class="hint">Need driver account? <a href="{% url 'core:register_driver' %}" style="color:#c78bff;">Driver Reg</a></div>
+		</div>
+	</form>
+  </div>
 </div>
-
 {% endblock %}
