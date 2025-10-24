@@ -8,6 +8,15 @@
         <div class="card p-4" style="width: 80%;">
           <div class="card-body">
             <h5 class="card-title">{{ review.booking.pickup_location }} -- {{ review.booking.dropoff_location }}</h5>
+            <body>
+            <h6 class="card-subtitle mb-2 text-muted">Rating: {{ review.rating }} / 5</h6>
+            <h7 class="card-subtitle mb-2 text-muted">Reviewer Rating: {{ review.rating }} / 5</h7>
+            <h7 class="card-subtitle mb-2 text-muted">Driver Rating: {{ review.driver_rating }} / 5</h7>
+            <li><strong>Comments:</strong> {{ review.comments }}</li>
+            
+
+
+            </body>
             <p class="card-text">Reviewer: {{ review.user.user.username }}</p>
               <p class="card-text">Reviewed: {{ review.driver.user.username }}</p>
               <p class="card-text">Review: {{ review.review }}</p>
