@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title %}The Payments{% endblock %}
+
+{% block content %}
+<div class="container mx-auto">
+
+        {% for payment in payments %}
+        {% if payment.status == False %}
+        <div class="card p-4" style="width: 80%;">
+          <div class="card-body">
+            <h5 class="card-title">{{ payment.booking_user_side.pickup_location }} -- {{ payment.booking_user_side.dropoff_location }}</h5>
+            <p class="card-text">To pay: {{ payment.to_pay }} Taka</p>
+              <div class="md-3 p-3">
+                  <a href="{% url 'booking_n_service:pay_payment' payment.id %}" class="card-link btn btn-primary">Pay</a>
+              </div>
+              <div class="md-3 p-3">
+                  <a href="{% url 'support_n_notification:give_review' payment.booking_user_side.id %}" class="card-link btn btn-primary">Review</a>
+              </div>
+
+
+          </div>
+        </div>
+        {% endif %}
+        {% endfor %}
+
+
+</div>
+{% endblock %}

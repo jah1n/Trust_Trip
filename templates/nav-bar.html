@@ -1,0 +1,66 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="{% url 'home' %}">Trust Trip</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Home</a>
+        </li>
+            {% if user.is_authenticated %}
+                {% if user.driver_profile %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'core:driver_profile' %}">Profile</a>
+
+                </li>
+
+                {% elif user.user_profile %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'core:user_profile' %}">Profile</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'booking_n_service:book_a_ride' %}">Book</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'booking_n_service:view_payment' %}">Payment</a>
+                </li>
+                {% endif %}
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'support_n_notification:view_review' %}">Review</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'core:logout_user' %}">Logout</a>
+                </li>
+            {% else %}
+                <li class="nav-item p-1">
+                        <div class="dropdown">
+                              <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                User
+                              </button>
+                              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <a class="dropdown-item" href="{% url 'core:login_user' 'user' %}">Login</a>
+                                    <a class="dropdown-item" href="{% url 'core:reg_user' %}">Registration</a>
+                              </div>
+                        </div>
+                </li>
+                <li class="nav-item p-1">
+                        <div class="dropdown">
+                              <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Driver
+                              </button>
+                              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <a class="dropdown-item" href="{% url 'core:login_driver' 'driver' %}">Login</a>
+                                    <a class="dropdown-item" href="{% url 'core:register_driver' %}">Registration</a>
+                              </div>
+                        </div>
+              </li>
+
+          {% endif %}
+
+      </ul>
+
+    </div>
+  </div>
+</nav>

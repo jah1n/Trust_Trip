@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}Driver Deletion{% endblock %}
+
+{% block content %}
+<div class="container">
+    <form action="" method="post">
+        {% csrf_token %}
+        <div class="mb-3">
+            <p>Do you want to delete your profile?</p>
+            <p>Then, Enter password and submit.</p>
+        </div>
+        <div class="mb-3">
+            <label for="InputPassword1" class="form-label">Password</label>
+            <input type="password" name="password" class="form-control" id="InputPassword1">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+
+    </form>
+</div>
+
+{% endblock %}

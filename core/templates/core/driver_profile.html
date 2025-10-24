@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% block title %}Driver Profile{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-md-5">
+      <div class="card text-center shadow">
+        <div class="card-body">
+
+
+          <div class="mb-3">
+            {% if driver.picture %}
+              <img src="{{ driver.picture.url }}" class="card-img-top rounded-circle" style="width: 150px; height: 150px; object-fit: cover;" alt="Driver picture">
+            {% else %}
+              <img src="https://icons.iconarchive.com/icons/papirus-team/papirus-status/256/avatar-default-icon.png"
+                   class="card-img-top rounded-circle" style="width: 150px; height: 150px; object-fit: cover;" alt="Default avatar">
+            {% endif %}
+          </div>
+
+          <h4 class="mb-2">{{ driver.user.get_full_name|default:driver.user.username }}</h4>
+          <p class="text-muted mb-3">{{ driver.user.email }}</p>
+
+          <hr>
+
+          <p class="card-text"><strong>License Number:</strong> {{ driver.license_number|default:"Not provided" }}</p>
+          <p class="card-text"><strong>Vehicle Brand:</strong> {{ driver.vehicle_brand|default:"Not provided" }}</p>
+          <p class="card-text"><strong>Vehicle Model:</strong> {{ driver.vehicle_model|default:"Not provided" }}</p>
+          <p class="card-text"><strong>Vehicle Plate:</strong> {{ driver.vehicle_plate|default:"Not provided" }}</p>
+
+          <p class="card-text">
+            <strong>Availability:</strong>
+            {% if driver.availability_status %}
+              <span class="text-success">Available</span>
+            {% else %}
+              <span class="text-danger">Unavailable</span>
+            {% endif %}
+          </p>
+
+          <p class="card-text">
+            <strong>Rating:</strong>
+            {% if driver.rating %}
+              ⭐ {{ driver.rating }}/5
+            {% else %}
+              Not Rated Yet
+            {% endif %}
+          </p>
+
+          <hr>
+            {% if user.driver_profile %}
+          <div class="d-flex justify-content-center gap-2">
+            <a href="{% url 'core:update_driver' %}" class="btn btn-primary btn-sm">Update</a>
+            <a href="{% url 'core:delete_driver' %}" class="btn btn-outline-secondary btn-sm">Delete</a>
+          </div>
+            {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

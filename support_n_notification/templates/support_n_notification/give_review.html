@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %}Give Review{% endblock %}
+
+{% block content %}
+<div class="container">
+    <form action="" method="post">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="Review" class="form-label">Review</label>
+            <input type="text" name="review" class="form-control" id="Review">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+
+    </form>
+</div>
+
+{% endblock %}

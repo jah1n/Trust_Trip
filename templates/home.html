@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<div class="container-fluid text-center">
+    <div class="mb-3">
+        <h2>Map</h2>
+      <iframe
+        style="width: 80vw; height: 80vh; border: 0;"
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3651.896735303799!2d90.39196307435677!3d23.750866579497206!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755b8a4ac77a53f%3A0x5b6ef1a1b89d5b29!2sDhaka!5e0!3m2!1sen!2sbd!4v1697560000000!5m2!1sen!2sbd"
+        allowfullscreen=""
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade">
+      </iframe>
+
+    </div>
+
+        {% if user.is_authenticated %}
+            <div class="container">
+                {% for booking in bookings %}
+                <div class="row mb-3">
+                    <div class="card " style="width: 100rem;">
+                          <div class="card-body p-5">
+                                <h5 class="card-title">{{ booking.pickup_location }} --- {{ booking.dropoff_location }}</h5>
+                                <p class="card-text">Driver Assigned: {% if booking.booking_driver_side != None %}{{ booking.booking_driver_side.driver.user.username }}{% else %}Not Yet{% endif %}</p>
+                                <a href="{% url 'booking_n_service:view_booking' booking.id %}" class="card-link btn btn-primary">View</a>
+
+                          </div>
+                    </div>
+                </div>
+
+                {% endfor %}
+            </div>
+        {% endif %}
+</div>
+{% endblock %}

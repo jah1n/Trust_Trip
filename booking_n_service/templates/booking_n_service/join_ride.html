@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}Take Ride{% endblock %}
+
+{% block content %}
+<div class="container-fluid text-center">
+    <div class="mb-3">
+        <p>Do you want to join this deal?</p>
+        <p>Net Fare: {{ booking.booking_driver_side.net_fare }} Taka</p>
+        <p>Net distance: {{ booking.distance }} Km</p>
+        <form action="" method="post">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="distance" class="form-label">Distance (km)</label>
+                <input type="number" name="distance" id="distance" class="form-control"
+                       placeholder="Enter distance in kilometers" step="0.1" min="0" required>
+            </div>
+            <a href="{% url 'home' %}" class="btn btn-primary">Go to home</a>
+            <button type="submit" class="btn btn-primary">Join Ride</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

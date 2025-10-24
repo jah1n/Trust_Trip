@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %}The Reviews{% endblock %}
+
+{% block content %}
+<div class="container mx-auto">
+    {% for review in reviews %}
+        <div class="card p-4" style="width: 80%;">
+          <div class="card-body">
+            <h5 class="card-title">{{ review.booking.pickup_location }} -- {{ review.booking.dropoff_location }}</h5>
+            <p class="card-text">Reviewer: {{ review.user.user.username }}</p>
+              <p class="card-text">Reviewed: {{ review.driver.user.username }}</p>
+              <p class="card-text">Review: {{ review.review }}</p>
+          </div>
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}

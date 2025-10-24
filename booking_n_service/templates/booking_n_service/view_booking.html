@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block title %}The Booking{% endblock %}
+
+{% block content %}
+<div class="container mx-auto">
+    <div class="card" style="width: 80%;">
+        <div class="card-body text-center">
+            <h5 class="card-title">{{ booking.pickup_location }} --- {{ booking.dropoff_location }}</h5>
+            <h6 class="card-subtitle mb-2 text-muted">{{ net_fare }}</h6>
+
+            {% if profile == 'user_profile' %}
+                {% if user == booking.user.user %}
+                    {% if booking.booking_driver_side %}
+                    <p class="card-text">{{ booking.booking_driver_side.driver.user.username }}</p>
+                    <p class="card-text">Car: {{ booking.booking_driver_side.driver.vehicle_brand }} : {{ booking.booking_driver_side.driver.vehicle_model }}</p>
+                    <p class="card-text">Plate Number: {{ booking.booking_driver_side.driver.vehicle_plate }}</p>
+                    {% else %}
+                    <p class="card-text">No Driver Assigned</p>
+                    {% endif %}
+                {% else %}
+                    {% if booking.booking_driver_side %}
+                    <p class="card-text">{{ booking.booking_driver_side.driver.user.username }}</p>
+                    <p class="card-text">Car: {{ booking.booking_driver_side.driver.vehicle_brand }} : {{ booking.booking_driver_side.driver.vehicle_model }}</p>
+                    <p class="card-text">Plate Number: {{ booking.booking_driver_side.driver.vehicle_plate }}</p>
+                    {% if joined_share %}
+                    <a href="{% url 'booking_n_service:join_ride' booking.id %}" class="card-link btn btn-primary">Join</a>
+                    {% endif %}
+                    {% else %}
+                    <p class="card-text">No Driver Assigned</p>
+                    {% endif %}
+                {% endif %}
+            {% elif profile == 'driver_profile' %}
+                {% if shares != None %}
+                <p class="card-text">Passengers:</p>
+                <p class="card-text">{{ booking.user.user.username }}</p>
+                {% for share in shares %}
+                <p class="card-text">{{ share.user.user.username }}</p>
+                {% endfor %}
+                {% else %}
+                <p class="card-text">Passenger: {{ booking.user.user.username }}</p>
+                {% endif %}
+                {% if booking.booking_driver_side == None %}
+                <a href="{% url 'booking_n_service:take_ride' booking.id %}" class="card-link btn btn-primary">Take</a>
+                {% elif booking.booking_driver_side.driver.user == user %}
+                <a href="{% url 'booking_n_service:end_ride' booking.id %}" class="card-link btn btn-primary">End</a>
+                {% endif %}
+            {% endif %}
+        </div>
+    </div>
+
+</div>
+{% endblock %}

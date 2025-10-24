@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block title %}User Registration{% endblock %}
+
+{% block content %}
+<div class="container">
+    <form action="" method="post">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="InputUsername1" class="form-label">Username</label>
+            <input type="text" name="username" class="form-control" id="InputUsername1">
+        </div>
+        <div class="mb-3">
+            <label for="InputEmail1" class="form-label">Email</label>
+            <input type="email" name="email" class="form-control" id="InputEmail1">
+        </div>
+        <div class="mb-3">
+            <label for="InputLNum" class="form-label">License Number</label>
+            <input type="text" name="l_num" class="form-control" id="InputLNum">
+        </div>
+        <div class="mb-3">
+            <label for="vehicle_brand" class="form-label">Vehicle Brand</label>
+            <input type="text" name="vehicle_brand" class="form-control" id="vehicle_brand">
+        </div>
+        <div class="mb-3">
+            <label for="vehicle_model" class="form-label">Vehicle Model</label>
+            <input type="text" name="vehicle_model" class="form-control" id="vehicle_model">
+        </div>
+        <div class="mb-3">
+            <label for="vehicle_plate" class="form-label">Vehicle Number</label>
+            <input type="text" name="vehicle_plate" class="form-control" id="vehicle_plate">
+        </div>
+        <div class="mb-3">
+            <label for="InputPassword1" class="form-label">Password</label>
+            <input type="password" name="password" class="form-control" id="InputPassword1">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+
+    </form>
+</div>
+
+{% endblock %}

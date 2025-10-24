@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}End Ride{% endblock %}
+
+{% block content %}
+<div class="container-fluid text-center">
+    <div class="mb-3">
+        <p>Do you want to end this ride?</p>
+        <p>Net Fare: {{ booking.booking_driver_side.net_fare }} Taka</p>
+        <form action="" method="post">
+            {% csrf_token %}
+            <a href="{% url 'home' %}" class="btn btn-primary">Go to home</a>
+            <button type="submit" class="btn btn-primary">End Ride</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

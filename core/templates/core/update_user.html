@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block title %}Update User{% endblock %}
+
+{% block content %}
+<div class="container">
+    <form action="" method="post">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="InputUsername1" class="form-label">Username</label>
+            <input type="text" name="username" value="{{ user.username }}" class="form-control" id="InputUsername1">
+        </div>
+        <div class="mb-3">
+            <label for="InputEmail1" class="form-label">Email</label>
+            <input type="email" name="email" value="{{ user.email }}" class="form-control" id="InputEmail1">
+        </div>
+        <div class="mb-3">
+            <label for="InputPhone1" class="form-label">Phone</label>
+            <input type="text" name="phone_number" value="{{ user.user_profile.phone_number }}" class="form-control" id="InputPhone1">
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label" for="dob">Start Date: </label>
+            <input type="date" class="form-control" name="dob" id="dob" value="{{ user.user_profile.birth_date|date:'Y-m-d' }}">
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label" for="gender">Gender: </label>
+            <select class="form-select" name="gender" aria-label="Default select example" id="gender">
+              <option {% if user.user_profile.gender == "Unspecified" %} selected {% endif %}>Gender</option>
+              <option value="Male" {% if user.user_profile.gender == "Male" %} selected {% endif %}>Male</option>
+              <option value="Female" {% if user.user_profile.gender == "Female" %} selected {% endif %}>Female</option>
+              <option value="Other" {% if user.user_profile.gender == "Other" %} selected {% endif %}>Other</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label class="form-label" for="smokes">Smokes: </label>
+            <select class="form-select" name="smoking_status" aria-label="Default select example" id="smokes">
+              <option {% if user.user_profile.smoking_status == "Unspecified" %} selected {% endif %}>Smokes</option>
+              <option value="Allowed" {% if user.user_profile.smoking_status == "Allowed" %} selected {% endif %}>No</option>
+              <option value="Not Allowed" {% if user.user_profile.smoking_status == "Not Allowed" %} selected {% endif %}>Yes</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Update</button>
+    </form>
+</div>
+{% endblock %}

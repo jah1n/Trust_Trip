@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}Take Ride{% endblock %}
+
+{% block content %}
+<div class="container-fluid text-center">
+    <div class="mb-3">
+        <p>Do you want to take this deal?</p>
+        <p>Net Fare: {{ net_fare }} Taka</p>
+        <form action="" method="post">
+            {% csrf_token %}
+            <a href="{% url 'home' %}" class="btn btn-primary">Go to home</a>
+            <button type="submit" class="btn btn-primary">Take Deal</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

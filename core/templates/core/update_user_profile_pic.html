@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}Update Picture{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1 >Update Picture</h1>
+
+    <div class="row align-items-center justify-content-center p-5 sm">
+        {% if profile.picture %}
+            <img src="{{ profile.picture.url }}" alt="Profile Picture" width="100px" class="rounded mb-2 img-thumbnail ">
+        {% else %}
+            <img src="https://icons.iconarchive.com/icons/papirus-team/papirus-status/256/avatar-default-icon.png" alt="No Profile Picture" width="100px" class="rounded mb-2 img-thumbnail ">
+        {% endif %}
+    </div>
+    <form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <label class="form-label" for="picture">Picture: </label>
+        <input type="file" class="form-control" name="picture" id="picture" accept="image/*" required>
+        <button type="submit" class="btn btn-primary">Update</button>
+    </form>
+</div>
+{% endblock %}

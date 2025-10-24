@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %}Book{% endblock %}
+
+{% block content %}
+<div class="container text-center">
+<form method="post" action="">
+    {% csrf_token %}
+
+    <div class="mb-3">
+        <label for="distance" class="form-label">Distance (km)</label>
+        <input type="number" name="distance" id="distance" class="form-control"
+               placeholder="Enter distance in kilometers" step="0.1" min="0" required>
+    </div>
+
+    <div class="mb-3">
+        <label for="pickup_location" class="form-label">Pickup Location</label>
+        <input type="text" name="pickup_location" id="pickup_location"
+               class="form-control" placeholder="Enter pickup location" required>
+    </div>
+
+    <div class="mb-3">
+        <label for="dropoff_location" class="form-label">Dropoff Location</label>
+        <input type="text" name="dropoff_location" id="dropoff_location"
+               class="form-control" placeholder="Enter dropoff location" required>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+</div>
+{% endblock %}

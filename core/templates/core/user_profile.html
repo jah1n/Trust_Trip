@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block title %}Profile{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-md-4">
+      <div class="card text-center shadow">
+        <div class="card-body">
+            <div class="media">
+                {% if profile.picture %}
+                    <img src="{{ profile.picture.url }}" class="card-img-top" alt="Profile picture">
+                    <a href="{% url 'core:update_user_profile_picture' %}" class="btn btn-primary btn-sm me-2">Update</a>
+                {% else %}
+                    <img src="https://icons.iconarchive.com/icons/papirus-team/papirus-status/256/avatar-default-icon.png" class="card-img-top" alt="Profile picture">
+                    <a href="{% url 'core:update_user_profile_picture' %}" class="btn btn-primary btn-sm me-2">Update</a>
+                {% endif %}
+            </div>
+
+            <p class="card-text">Username: {{ user.username }}</p>
+            <p class="card-text">Gender: {{ profile.gender }}</p>
+            <p class="card-text">Date of Birth: {{ profile.birth_date }}</p>
+            <p class="card-text">Smoke: {{ profile.smoking_status }}</p>
+            <p class="card-text">Verified: {% if profile.is_verified %}Yes{% else %}No{% endif %}</p>
+          <a href="{% url 'core:update_user' %}" class="btn btn-primary btn-sm me-2">Update</a>
+          <a href="{% url 'core:delete_user' %}" class="btn btn-outline-secondary btn-sm">Delete</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

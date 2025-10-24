@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+
+{% block title %}Update Driver Profile{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+    <h3 class="mb-4 text-center">Update Driver Profile</h3>
+
+    <form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <!-- Picture -->
+        <div class="mb-3 text-center">
+            {% if driver.picture %}
+                <img src="{{ driver.picture.url }}" alt="Driver Picture" class="rounded-circle mb-2" style="width: 120px; height: 120px; object-fit: cover;">
+            {% else %}
+                <img src="https://icons.iconarchive.com/icons/papirus-team/papirus-status/256/avatar-default-icon.png"
+                     alt="Default Picture" class="rounded-circle mb-2" style="width: 120px; height: 120px; object-fit: cover;">
+            {% endif %}
+            <div>
+                <label class="form-label" for="pic">Change Picture:</label>
+                <input type="file" name="picture" id="pic" class="form-control">
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label for="username" class="form-label">Username:</label>
+            <input type="text" name="username" value="{{ driver.user.username }}" class="form-control" id="username">
+        </div>
+
+        <div class="mb-3">
+            <label for="email" class="form-label">Email:</label>
+            <input type="email" name="email" value="{{ driver.user.email }}" class="form-control" id="email">
+        </div>
+
+        <div class="mb-3">
+            <label for="license_number" class="form-label">License Number:</label>
+            <input type="text" name="license_number" value="{{ driver.license_number }}" class="form-control" id="license_number">
+        </div>
+
+        <div class="mb-3">
+            <label for="vehicle_brand" class="form-label">Vehicle Brand:</label>
+            <input type="text" name="vehicle_brand" value="{{ driver.vehicle_brand }}" class="form-control" id="vehicle_brand">
+        </div>
+
+        <div class="mb-3">
+            <label for="vehicle_model" class="form-label">Vehicle Model:</label>
+            <input type="text" name="vehicle_model" value="{{ driver.vehicle_model }}" class="form-control" id="vehicle_model">
+        </div>
+
+        <div class="mb-3">
+            <label for="vehicle_plate" class="form-label">Vehicle Plate:</label>
+            <input type="text" name="vehicle_plate" value="{{ driver.vehicle_plate }}" class="form-control" id="vehicle_plate">
+        </div>
+
+        <div class="mb-3">
+            <label for="availability_status" class="form-label">Availability:</label>
+            <select class="form-select" name="availability_status" id="availability_status">
+                <option value="True" {% if driver.availability_status %}selected{% endif %}>Available</option>
+                <option value="False" {% if not driver.availability_status %}selected{% endif %}>Unavailable</option>
+            </select>
+        </div>
+
+        <button type="submit" class="btn btn-primary w-100">Update Profile</button>
+    </form>
+</div>
+{% endblock %}
